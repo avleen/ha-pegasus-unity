@@ -1,0 +1,58 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Pegasus Unity",
+        "description": "Enter the address of your Pegasus Astro Unity platform server.",
+        "data": {
+          "host": "Host",
+          "port": "Port"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect",
+      "unknown": "Unexpected error"
+    },
+    "abort": {
+      "already_configured": "This Pegasus Unity server is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Pegasus Unity options",
+        "data": {
+          "scan_interval": "Scan interval (seconds)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "voltage": { "name": "Voltage" },
+      "current": { "name": "Current" },
+      "quad_current": { "name": "Quad port current" },
+      "power": { "name": "Power" },
+      "temperature": { "name": "Temperature" },
+      "humidity": { "name": "Humidity" },
+      "dew_point": { "name": "Dew point" },
+      "average_current": { "name": "Average current" },
+      "amp_hours": { "name": "Amp hours" },
+      "energy": { "name": "Energy" },
+      "uptime": { "name": "Uptime" },
+      "auto_dew_aggressiveness": { "name": "Auto dew aggressiveness" },
+      "variable_voltage": { "name": "Variable port voltage" },
+      "dew_power": { "name": "Dew heater {port} power" },
+      "dew_current": { "name": "Dew heater {port} current" }
+    },
+    "binary_sensor": {
+      "over_current": { "name": "Over current" },
+      "quad_output": { "name": "Quad output" },
+      "variable_output": { "name": "Variable output" },
+      "usb2_hub": { "name": "USB 2 hub" },
+      "auto_dew": { "name": "Auto dew" },
+      "dew_over_current": { "name": "Dew heater {port} over current" }
+    }
+  }
+}
