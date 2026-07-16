@@ -106,6 +106,6 @@ Entity IDs are keyed by the device hardware serial number, so they persist acros
 
 Design notes and technical details are in [`docs/DESIGN.md`](docs/DESIGN.md).
 
-This integration is licensed under the MIT License. See [`LICENSE`](LICENSE) for details.
+This integration is licensed under the GNU General Public License v3.0. See [`LICENSE`](LICENSE) for details.
 
 Pull requests and contributions are welcome!
