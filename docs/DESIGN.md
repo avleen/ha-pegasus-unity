@@ -70,7 +70,7 @@ USB2 hub (power), auto dew (running).
 
 ## Repo layout
 
-HACS-compatible: `custom_components/pegasus_unity/` + `hacs.json`, MIT
+HACS-compatible: `custom_components/pegasus_unity/` + `hacs.json`, GPL-3.0
 LICENSE, README, GitHub Actions running hassfest + HACS validation.
 
 ## Testing
