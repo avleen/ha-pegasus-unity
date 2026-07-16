@@ -92,6 +92,30 @@ After installation:
 | Dew heater 1 over current | On/Off | (Problem, Diagnostic) Dew heater 1 over-current |
 | Dew heater 2 over current | On/Off | (Problem, Diagnostic) Dew heater 2 over-current |
 
+## Dashboard
+
+A ready-made dashboard for the PPBA ships in [`examples/dashboard.yaml`](examples/dashboard.yaml): power gauges, a temperature-vs-dew-point graph for dew risk, dew heater history, output states, and health diagnostics, plus an over-current warning badge.
+
+It references the default entity IDs (`sensor.pocket_powerbox_advance_*`), so it works as-is for a single PPBA whose entities haven't been renamed. Two ways to use it:
+
+**Option A — UI dashboard (simplest).** Settings → Dashboards → **Add dashboard** → "New dashboard from scratch". Open it, click the pencil (edit), then ⋮ → **Raw configuration editor**, and paste the contents of `examples/dashboard.yaml`.
+
+**Option B — YAML mode.** Copy the file into your config (e.g. `dashboards/pegasus_astro.yaml`) and register it in `configuration.yaml`:
+
+```yaml
+lovelace:
+  mode: storage
+  dashboards:
+    pegasus-astro:
+      mode: yaml
+      title: Pegasus Astro
+      icon: mdi:telescope
+      show_in_sidebar: true
+      filename: dashboards/pegasus_astro.yaml
+```
+
+Restart once; afterwards, edits to the file appear on browser refresh. If you renamed your device or have multiple PPBAs, search-and-replace `pocket_powerbox_advance` with your entity ID prefix.
+
 ## How It Works
 
 The integration periodically polls the Pegasus Unity server REST API to:

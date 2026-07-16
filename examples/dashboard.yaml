@@ -1,0 +1,158 @@
+title: Pegasus Astro
+views:
+  - title: PPB Advance
+    path: ppba
+    icon: mdi:telescope
+    type: sections
+    max_columns: 3
+    badges:
+      - type: entity
+        entity: binary_sensor.pocket_powerbox_advance_over_current
+        name: OVER CURRENT
+        color: red
+        visibility:
+          - condition: state
+            entity: binary_sensor.pocket_powerbox_advance_over_current
+            state: "on"
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Power
+            icon: mdi:flash
+          - type: gauge
+            entity: sensor.pocket_powerbox_advance_voltage
+            name: Input voltage
+            needle: true
+            min: 10
+            max: 14
+            severity:
+              red: 10
+              yellow: 11
+              green: 11.5
+          - type: gauge
+            entity: sensor.pocket_powerbox_advance_current
+            name: Total current
+            needle: true
+            min: 0
+            max: 10
+            severity:
+              green: 0
+              yellow: 6
+              red: 8
+          - type: tile
+            entity: sensor.pocket_powerbox_advance_power
+            name: Power draw
+          - type: tile
+            entity: sensor.pocket_powerbox_advance_quad_port_current
+            name: Quad port current
+          - type: history-graph
+            title: Power draw (12 h)
+            hours_to_show: 12
+            entities:
+              - entity: sensor.pocket_powerbox_advance_power
+                name: Power
+              - entity: sensor.pocket_powerbox_advance_current
+                name: Current
+      - type: grid
+        cards:
+          - type: heading
+            heading: Environment
+            icon: mdi:weather-night-partly-cloudy
+          - type: tile
+            entity: sensor.pocket_powerbox_advance_temperature
+            name: Temperature
+          - type: tile
+            entity: sensor.pocket_powerbox_advance_dew_point
+            name: Dew point
+          - type: tile
+            entity: sensor.pocket_powerbox_advance_humidity
+            name: Humidity
+          - type: history-graph
+            title: Dew risk — temperature vs dew point (24 h)
+            hours_to_show: 24
+            entities:
+              - entity: sensor.pocket_powerbox_advance_temperature
+                name: Temperature
+              - entity: sensor.pocket_powerbox_advance_dew_point
+                name: Dew point
+          - type: history-graph
+            title: Humidity (24 h)
+            hours_to_show: 24
+            entities:
+              - entity: sensor.pocket_powerbox_advance_humidity
+                name: Humidity
+      - type: grid
+        cards:
+          - type: heading
+            heading: Dew heaters
+            icon: mdi:heat-wave
+          - type: tile
+            entity: binary_sensor.pocket_powerbox_advance_auto_dew
+            name: Auto dew
+          - type: tile
+            entity: sensor.pocket_powerbox_advance_auto_dew_aggressiveness
+            name: Aggressiveness
+          - type: tile
+            entity: sensor.pocket_powerbox_advance_dew_heater_1_power
+            name: Heater 1 power
+          - type: tile
+            entity: sensor.pocket_powerbox_advance_dew_heater_1_current
+            name: Heater 1 current
+          - type: tile
+            entity: sensor.pocket_powerbox_advance_dew_heater_2_power
+            name: Heater 2 power
+          - type: tile
+            entity: sensor.pocket_powerbox_advance_dew_heater_2_current
+            name: Heater 2 current
+          - type: history-graph
+            title: Heater output (24 h)
+            hours_to_show: 24
+            entities:
+              - entity: sensor.pocket_powerbox_advance_dew_heater_1_power
+                name: Heater 1
+              - entity: sensor.pocket_powerbox_advance_dew_heater_2_power
+                name: Heater 2
+      - type: grid
+        cards:
+          - type: heading
+            heading: Outputs
+            icon: mdi:power-socket
+          - type: tile
+            entity: binary_sensor.pocket_powerbox_advance_quad_output
+            name: Quad 12V output
+          - type: tile
+            entity: binary_sensor.pocket_powerbox_advance_variable_output
+            name: Variable output
+          - type: tile
+            entity: sensor.pocket_powerbox_advance_variable_port_voltage
+            name: Variable voltage
+          - type: tile
+            entity: binary_sensor.pocket_powerbox_advance_usb_2_hub
+            name: USB 2 hub
+      - type: grid
+        cards:
+          - type: heading
+            heading: Health & consumption
+            icon: mdi:stethoscope
+          - type: tile
+            entity: binary_sensor.pocket_powerbox_advance_over_current
+            name: Over current
+          - type: tile
+            entity: binary_sensor.pocket_powerbox_advance_dew_heater_1_over_current
+            name: Heater 1 over current
+          - type: tile
+            entity: binary_sensor.pocket_powerbox_advance_dew_heater_2_over_current
+            name: Heater 2 over current
+          - type: tile
+            entity: sensor.pocket_powerbox_advance_average_current
+            name: Average current
+          - type: tile
+            entity: sensor.pocket_powerbox_advance_amp_hours
+            name: Amp hours (session)
+          - type: tile
+            entity: sensor.pocket_powerbox_advance_energy
+            name: Energy (session)
+          - type: tile
+            entity: sensor.pocket_powerbox_advance_uptime
+            name: Uptime
