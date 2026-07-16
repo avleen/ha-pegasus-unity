@@ -24,3 +24,6 @@ jobs:
         uses: hacs/action@main
         with:
           category: integration
+          # "brands" requires the domain to be merged into
+          # home-assistant/brands; drop this once that PR lands.
+          ignore: brands
