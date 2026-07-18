@@ -97,30 +97,42 @@ async def async_setup_entry(
     entry: PegasusUnityConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    """Set up Pegasus Unity binary sensors from the coordinator data."""
+    """Set up Pegasus Unity binary sensors, adding devices as they appear."""
     coordinator = entry.runtime_data
-    entities: list[PegasusUnityBinarySensor] = []
+    known_devices: set[str] = set()
 
-    for device_id, data in coordinator.data.items():
-        for description in BINARY_SENSOR_DESCRIPTIONS:
-            entities.append(
-                PegasusUnityBinarySensor(
-                    coordinator, device_id, data.full_name, data.firmware, description
+    def _add_new_devices() -> None:
+        entities: list[PegasusUnityBinarySensor] = []
+        for device_id, data in coordinator.data.items():
+            if device_id in known_devices:
+                continue
+            known_devices.add(device_id)
+            for description in BINARY_SENSOR_DESCRIPTIONS:
+                entities.append(
+                    PegasusUnityBinarySensor(
+                        coordinator,
+                        device_id,
+                        data.full_name,
+                        data.firmware,
+                        description,
+                    )
                 )
-            )
-        for port in data.dew_ports:
-            entities.append(
-                PegasusUnityBinarySensor(
-                    coordinator,
-                    device_id,
-                    data.full_name,
-                    data.firmware,
-                    _dew_over_current_description(port.number),
-                    {"port": str(port.number)},
+            for port in data.dew_ports:
+                entities.append(
+                    PegasusUnityBinarySensor(
+                        coordinator,
+                        device_id,
+                        data.full_name,
+                        data.firmware,
+                        _dew_over_current_description(port.number),
+                        {"port": str(port.number)},
+                    )
                 )
-            )
+        if entities:
+            async_add_entities(entities)
 
-    async_add_entities(entities)
+    _add_new_devices()
+    entry.async_on_unload(coordinator.async_add_listener(_add_new_devices))
 
 
 class PegasusUnityBinarySensor(PegasusUnityEntity, BinarySensorEntity):
